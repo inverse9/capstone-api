@@ -6,13 +6,13 @@ const TABLE = "object";
 
 router.get("/", async (req, res) => {
   try {
-    // Check if the "relation" query parameter is set to true
     const relation = req.query.relation === "true";
+    const userId = req.query.user_id;
 
     if (relation) {
-      // Query to fetch related data
       const sql = `
           SELECT 
+            o.user_id as user_id,
             o.nama AS object_name,
             op.id AS property_id,
             op.judul AS property_judul,
@@ -25,12 +25,13 @@ router.get("/", async (req, res) => {
             object_properties op ON o.id = op.object_id
           JOIN 
             object_image oi ON o.id = oi.object_id
+            ${userId ? `WHERE o.user_id = ?` : ""} 
           ORDER BY 
             o.id;
         `;
 
       // Execute the query to fetch related data
-      db.query(sql, (err, results) => {
+      db.query(sql, userId ? [userId] : [], (err, results) => {
         if (err) {
           return res.status(500).json({ error: err.message });
         }
@@ -41,6 +42,7 @@ router.get("/", async (req, res) => {
 
           if (!object) {
             object = {
+              user_id: row.user_id,
               object_name: row.object_name,
               properties: [],
               images: [],
@@ -73,10 +75,12 @@ router.get("/", async (req, res) => {
       });
     } else {
       // Query to fetch raw data from the table
-      const sql = `SELECT * FROM ${TABLE}`;
+      const sql = `SELECT * FROM ${TABLE}  ${
+        userId ? `WHERE user_id = ?` : ""
+      };`;
 
       // Execute the query
-      db.query(sql, (err, results) => {
+      db.query(sql, userId ? [userId] : [], (err, results) => {
         if (err) {
           return res.status(500).json({ error: err.message });
         }
@@ -90,6 +94,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
 router.get("/:id", (req, res) => {
   const sql = `SELECT * FROM ${TABLE} WHERE id = ?`;
   db.query(sql, [req.params.id], (err, result) => {
