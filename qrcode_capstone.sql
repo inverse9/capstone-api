@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2024 at 01:42 PM
+-- Generation Time: Nov 28, 2024 at 08:49 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,7 +31,6 @@ CREATE TABLE `object` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `nama` varchar(255) NOT NULL,
-  `scanned` int(11) NOT NULL DEFAULT 0,
   `date_time` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,8 +38,8 @@ CREATE TABLE `object` (
 -- Dumping data for table `object`
 --
 
-INSERT INTO `object` (`id`, `user_id`, `nama`, `scanned`, `date_time`) VALUES
-(1, 2, 'patung caturmuka', 8, '2024-11-23 03:21:50');
+INSERT INTO `object` (`id`, `user_id`, `nama`, `date_time`) VALUES
+(1, 2, 'patung caturmuka', '2024-11-23 03:21:50');
 
 -- --------------------------------------------------------
 
@@ -82,10 +81,22 @@ CREATE TABLE `object_properties` (
 
 INSERT INTO `object_properties` (`id`, `object_id`, `judul`, `isi`) VALUES
 (1, 1, 'Sejarah', 'Patung catur muka dibuat pada tahun 1973 oleh seorang seniman bernama\r\n          <b> I Gusti Nyoman Lempad (Dhana, 2002).</b> <br />\r\n          Patung ini berbahan dasar batu granit dengan tinggi sembilan (9) meter\r\n          dan terletak di tengah perempatan yang menghubungkan jalan Gajah Mada,\r\n          jalan Surapati, jalan Veteran dan jalan Udayana.'),
-(3, 1, 'Makna kepala empat pada Patung Catur Muka', ' Patung Catur Muka mengambil sosok Dewa Brahma. Dewa Brahma dipercaya\r\n          sebagai simbol asal mula dari kehidupan dan kenyataan yang tidak\r\n          terbatas. Pada bagian bawah (alas) terdapat bunga lotus atau padma\r\n          sebagai lambang kesucian dan alam semesta.\r\n          <br />\r\n          <br />\r\n          Catur Muka berasal dari kata catur yang berarti empat, dan muka\r\n          berarti kepala atau wajah. Jadi Catur Muka berarti sosok yang memiliki\r\n          empat kepala. Pada Patung Catur Muka terdapat empat kepala sebagai\r\n          simbol Dewa Brahma dengan empat sifat berbeda. Masing-masing kepala\r\n          pada Patung Catur Muka menghadap ke empat arah penjuru mata angin.\r\n          <br />\r\n          <br />\r\n          <b>Berikut makna dari empat kepala pada Patung Catur Muka:</b>\r\n          <ol className=\"list-disc\">\r\n            <li className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              Kepala yang menghadap ke barat atau ke Jalan Gajah Mada sebagai\r\n              simbol Dewa Mahadewa yang memiliki sifat kasih sayang{\" \"}\r\n            </li>\r\n            <li className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              Kepala menghadap ke timur atau ke Jalan Surapati sebagai simbol\r\n              Dewa Iswara yang memiliki sifat bijaksana{\" \"}\r\n            </li>\r\n            <li className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              Kepala menghadap ke selatan atau ke Jalan Udayana sebagai simbol\r\n              Dewa Brahma yang memiliki sifat menjaga ketentraman\r\n            </li>\r\n            <li className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              Kepala yang menghadap ke utara atau ke Jalan Veteran sebagai\r\n              simbol Dewa Wisnu sebagai simbol sifat kuat dan menyucikan jiwa\r\n              manusia.\r\n            </li>\r\n          </ol>'),
+(3, 1, 'Makna kepala empat pada Patung Catur Muka', ' Patung Catur Muka mengambil sosok Dewa Brahma. Dewa Brahma dipercaya\r\n          sebagai simbol asal mula dari kehidupan dan kenyataan yang tidak\r\n          terbatas. Pada bagian bawah (alas) terdapat bunga lotus atau padma\r\n          sebagai lambang kesucian dan alam semesta.\r\n          <br />\r\n          <br />\r\n          Catur Muka berasal dari kata catur yang berarti empat, dan muka\r\n          berarti kepala atau wajah. Jadi Catur Muka berarti sosok yang memiliki\r\n          empat kepala. Pada Patung Catur Muka terdapat empat kepala sebagai\r\n          simbol Dewa Brahma dengan empat sifat berbeda. Masing-masing kepala\r\n          pada Patung Catur Muka menghadap ke empat arah penjuru mata angin.\r\n          <br />\r\n          <br />\r\n          <b>Berikut makna dari empat kepala pada Patung Catur Muka:</b>\r\n          <ol className=\"list-disc\">\r\n            <li style=\"margin-left: 5px;\" className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              -  Kepala yang menghadap ke barat atau ke Jalan Gajah Mada sebagai\r\n              simbol Dewa Mahadewa yang memiliki sifat kasih sayang\r\n            </li>\r\n            <li style=\"margin-left: 5px;\" className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              -  Kepala menghadap ke timur atau ke Jalan Surapati sebagai simbol\r\n              Dewa Iswara yang memiliki sifat bijaksana\r\n            </li>\r\n            <li style=\"margin-left: 5px;\" className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              -  Kepala menghadap ke selatan atau ke Jalan Udayana sebagai simbol\r\n              Dewa Brahma yang memiliki sifat menjaga ketentraman\r\n            </li>\r\n            <li style=\"margin-left: 5px;\" className=\"ml-4 text-justify lg:text-sm mt-1\">\r\n              -  Kepala yang menghadap ke utara atau ke Jalan Veteran sebagai\r\n              simbol Dewa Wisnu sebagai simbol sifat kuat dan menyucikan jiwa\r\n              manusia.\r\n            </li>\r\n          </ol>'),
 (4, 1, 'Keistimewaan Patung Catur Muka', ' Patung Catur muka memiliki peran penting dalam mempertahankan\r\n          kebudayaan kerajaan. Patung Catur Muka berfungsi sebagai batas\r\n          wilayah, dan batas puri-puri sebagai transformasi kerajaan di Bali.\r\n          Selain wilayah puri-puri, juga sebagai pembagi wilayah Kota Denpasar.\r\n          <br />\r\n          <br />\r\n          Patung Catur Muka juga berperan penting dalam budaya dan tradisi.\r\n          Pemilihan lokasi di titik nol Kota Denpasar ini sekaligus menjadi\r\n          sebuah Catus Patha Agung (simpang empat utama) Kota Denpasar. Sebagai\r\n          Catus Patha Agung, Patung Catur Muka sebagai tempat pelaksanaan Tawur\r\n          Agung Kesanga Kota Denpasar, upacara pencaruan (upacara korban suci)\r\n          lainnya, dan upacara yang dilakukan pihak puri seperti Mepurwa\r\n          Daksina, dan lainnya.\r\n          <br />\r\n          <br />\r\n          Sebagai ikon Kota Denpasar, Patung Catur Muka sering dijadikan lokasi\r\n          acara yang diadakan oleh Pemkot Denpasar atau pihak lainnya. Patung\r\n          Catur Muka memiliki kekuatan taksu tersendiri bagi banjar-banjar di\r\n          seputaran Kota Denpasar saat pelaksanaan tradisi ogoh-ogoh. Hampir\r\n          setiap banjar yang membuat ogoh-ogoh selalu beratraksi di area Patung\r\n          Catur Muka.\r\n          <br />\r\n          <br />\r\n          Sebagai ikon Kota Denpasar, Patung Catur Muka selalu berbenah. Patung\r\n          Catur Muka kini memiliki air mancur yang dapat bergerak secara dinamis\r\n          dengan hiasan lampu-lampu warna-warni. Tak jarang, wisatawan yang\r\n          sedang berkunjung ke Kota Denpasar menyempatkan diri untuk\r\n          mengabadikan Patung Catur Muka.'),
 (6, 1, 'Video', '0XGhDxfroPA?si=J7oqyVbxkcYhUVRl'),
-(7, 1, 'Referensi', ' Ari Budiadnyana (18 September 2023)\r\n            <br />\r\n            <a\r\n              target=\"_blank\"\r\n              rel=\"noopener noreferrer\"\r\n              href=\"https://bali.idntimes.com/science/discovery/ari-budiadnyana/sejarah-patung-catur-muka-denpasar-c1c2\"\r\n              className=\"hover:underline hover:cursor-pointer text-blue-500\"\r\n            >\r\n              Sejarah Patung Catur Muka, Ikonnya Kota Denpasar\r\n            </a>');
+(7, 1, 'Referensi', ' 1. Ari Budiadnyana (18 September 2023)\r\n            <br />\r\n            <a\r\nstyle=\"color:rgb(59 130 246);cursor: pointer;text-decoration-line: underline;\";\r\n              target=\"_blank\"\r\n              rel=\"noopener noreferrer\"\r\n              href=\"https://bali.idntimes.com/science/discovery/ari-budiadnyana/sejarah-patung-catur-muka-denpasar-c1c2\"\r\n             \r\n            >\r\n              Sejarah Patung Catur Muka, Ikonnya Kota Denpasar\r\n            </a>');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `scan_history`
+--
+
+CREATE TABLE `scan_history` (
+  `id` int(11) NOT NULL,
+  `object_id` int(11) NOT NULL,
+  `date_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -136,6 +147,13 @@ ALTER TABLE `object_properties`
   ADD KEY `object_id` (`object_id`);
 
 --
+-- Indexes for table `scan_history`
+--
+ALTER TABLE `scan_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `object_id` (`object_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -164,6 +182,12 @@ ALTER TABLE `object_properties`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `scan_history`
+--
+ALTER TABLE `scan_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
@@ -190,6 +214,12 @@ ALTER TABLE `object_image`
 --
 ALTER TABLE `object_properties`
   ADD CONSTRAINT `object_properties_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `object` (`id`);
+
+--
+-- Constraints for table `scan_history`
+--
+ALTER TABLE `scan_history`
+  ADD CONSTRAINT `scan_history_ibfk_1` FOREIGN KEY (`object_id`) REFERENCES `object` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

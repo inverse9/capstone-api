@@ -199,34 +199,11 @@ router.post("/", (req, res) => {
 });
 
 router.put("/:id", (req, res) => {
-  const { nama, scanned } = req.body;
-  const fields = [];
-  const values = [];
-
-  if (nama !== undefined) {
-    fields.push("nama = ?");
-    values.push(nama);
-  }
-
-  if (scanned !== undefined) {
-    fields.push("scanned = ?");
-    values.push(scanned);
-  }
-
-  if (fields.length === 0) {
-    return res.status(400).json({ error: "No fields provided for update" });
-  }
-
-  values.push(req.params.id);
-
-  const sql = `UPDATE ${TABLE} SET ${fields.join(", ")} WHERE id = ?`;
-
-  db.query(sql, values, (err, result) => {
+  const { nama } = req.body;
+  const sql = `UPDATE ${TABLE} SET nama = ? WHERE id = ?;`;
+  db.query(sql, [nama, req.params.id], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json({
-      message: "Object updated successfully",
-      affectedRows: result.affectedRows,
-    });
+    res.json({ message: "Object updated successfully" });
   });
 });
 

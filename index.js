@@ -7,6 +7,7 @@ const objectsRoutes = require("./routes/object");
 const propertiesRoutes = require("./routes/object_properties");
 const imagesRoutes = require("./routes/object_image");
 const userRoutes = require("./routes/user");
+const scanHistoryRoutes = require("./routes/scan_history");
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use("/api/objects", objectsRoutes);
 app.use("/api/properties", propertiesRoutes);
 app.use("/api/image", imagesRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/history", scanHistoryRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 3000;
