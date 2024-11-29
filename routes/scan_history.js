@@ -17,12 +17,10 @@ router.get("/:id", (req, res) => {
   const objectId = req.params.id;
 
   if (!start_date || !end_date) {
-    return res
-      .status(400)
-      .json({
-        message:
-          "Please provide both start_date and end_date in the request body.",
-      });
+    return res.status(400).json({
+      message:
+        "Please provide both start_date and end_date in the request body.",
+    });
   }
 
   if (relation === "true") {
@@ -44,7 +42,6 @@ router.get("/:id", (req, res) => {
       if (results.length === 0)
         return res.status(404).json({ message: "Object not found" });
 
-      // Map results to an array of objects with id and object_name
       const responseData = results.map((row) => ({
         id: row.id,
         object_name: row.nama,
