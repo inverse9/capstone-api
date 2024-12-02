@@ -12,8 +12,10 @@ router.get("/", async (req, res) => {
     if (relation) {
       const sql = `
           SELECT 
+            o.id as object_id,
             o.user_id as user_id,
             o.nama AS object_name,
+            o.date_time AS date_time,
             op.id AS property_id,
             op.judul AS property_judul,
             op.isi AS property_isi,
@@ -42,8 +44,10 @@ router.get("/", async (req, res) => {
 
           if (!object) {
             object = {
+              id: row.object_id,
               user_id: row.user_id,
               object_name: row.object_name,
+              date_time: row.date_time,
               properties: [],
               images: [],
             };
@@ -103,8 +107,10 @@ router.get("/:id", (req, res) => {
     if (relation) {
       const sql = `
         SELECT 
+          o.id as object_id
           o.user_id AS user_id,
           o.nama AS object_name,
+          o.date_time AS date_time,
           op.id AS property_id,
           op.judul AS property_judul,
           op.isi AS property_isi,
@@ -135,6 +141,7 @@ router.get("/:id", (req, res) => {
         const structuredData = {
           id: objectId, // Include the object ID
           user_id: results[0].user_id,
+          date_time: results[0].date_time,
           object_name: results[0].object_name,
           properties: [],
           images: [],
