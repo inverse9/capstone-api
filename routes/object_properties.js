@@ -22,12 +22,38 @@ router.get("/:id", (req, res) => {
   });
 });
 
+// router.post("/", (req, res) => {
+//   const { object_id, judul, isi } = req.body;
+//   const sql = `INSERT INTO ${TABLE} (object_id, judul,isi) VALUES (?, ?, ?)`;
+//   db.query(sql, [object_id, judul, isi], (err, result) => {
+//     if (err) return res.status(500).json({ error: err.message });
+//     res.json({ id: result.insertId, object_id, judul, isi });
+//   });
+// });
+
 router.post("/", (req, res) => {
-  const { object_id, judul, isi } = req.body;
-  const sql = `INSERT INTO ${TABLE} (object_id, judul,isi) VALUES (?, ?, ?)`;
-  db.query(sql, [object_id, judul, isi], (err, result) => {
-    if (err) return res.status(500).json({ error: err.message });
-    res.json({ id: result.insertId, object_id, judul, isi });
+  const components = req.body;
+  if (!Array.isArray(components) || components.length === 0) {
+    return res.status(400).json({ error: "Invalid data" });
+  }
+
+  const values = components.map((component) => [
+    component.object_id,
+    component.judul,
+    component.isi,
+  ]);
+
+  const sql = `INSERT INTO ${TABLE} (object_id, judul, isi) VALUES ?`;
+
+  db.query(sql, [values], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: err.message });
+    }
+    res.json({
+      insertedCount: result.affectedRows,
+      components: result.insertId,
+    });
   });
 });
 

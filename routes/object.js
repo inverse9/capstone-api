@@ -25,7 +25,7 @@ router.get("/", async (req, res) => {
             object o
           JOIN 
             object_properties op ON o.id = op.object_id
-          JOIN 
+          left JOIN 
             object_image oi ON o.id = oi.object_id
             ${userId ? `WHERE o.user_id = ?` : ""} 
           ORDER BY 
