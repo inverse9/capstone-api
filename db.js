@@ -4,10 +4,10 @@ require("dotenv").config();
 const db = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "",
-  // password: "M|qNz{K4;~$&",
-  database: "qrcode_capstone", 
-}); 
+  // password: "",
+  password: "M|qNz{K4;~$&",
+  database: "qrcode_capstone",
+});
 
 db.connect((err) => {
   if (err) {
