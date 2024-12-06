@@ -7,7 +7,7 @@ const db = mysql.createConnection({
   password: "",
   // password: "M|qNz{K4;~$&",
   database: "qrcode_capstone",
-});
+}); 
 
 db.connect((err) => {
   if (err) {
