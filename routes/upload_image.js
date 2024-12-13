@@ -3,7 +3,6 @@ const upload = require('../middlewares/upload');
 
 const router = express.Router();
 
-// Change single to array for multiple files, 'images' is the field name in the form
 router.post('/upload', upload.array('images', 10), (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.status(400).json({ message: 'No files selected' });
