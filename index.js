@@ -27,7 +27,7 @@ app.use("/api/image", imagesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/history", scanHistoryRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/uploadimage", uploadImageRoutes)
+app.use("/api/uploadimage", uploadImageRoutes);
 
 // Start Server
 const PORT = process.env.PORT || 3000;
