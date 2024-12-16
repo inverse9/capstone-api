@@ -3,6 +3,7 @@ const db = require("../db.js");
 
 const router = express.Router();
 const TABLE = "object_image";
+const upload = require("../middlewares/upload");
 
 router.get("/", (req, res) => {
   const sql = `SELECT * FROM ${TABLE}`;
@@ -22,12 +23,22 @@ router.get("/:id", (req, res) => {
   });
 });
 
-router.post("/", (req, res) => {
-  const { object_id, src } = req.body;
-  const sql = `INSERT INTO ${TABLE} (object_id, src) VALUES (?, ?)`;
-  db.query(sql, [object_id, src], (err, result) => {
+router.post("/", upload.array("images", 10), (req, res) => {
+  const { object_id } = req.body;
+  const fileInfos = req.files.map((file) => ({
+    object_id: object_id,
+    src: file.path,
+  }));
+
+  const sql = `INSERT INTO ${TABLE} (object_id, src) VALUES ?`;
+  const values = fileInfos.map((file) => [file.object_id, file.src]);
+
+  db.query(sql, [values], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
-    res.json({ id: result.insertId, object_id, src });
+    res.status(200).json({
+      message: "Files uploaded and data inserted successfully",
+      files: fileInfos,
+    });
   });
 });
 

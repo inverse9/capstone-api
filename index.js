@@ -18,14 +18,14 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use("/api/objects", objectsRoutes);
 app.use("/api/properties", propertiesRoutes);
 app.use("/api/image", imagesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/history", scanHistoryRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/api/uploadimage", uploadImageRoutes);
+// app.use("/api/uploadimage", uploadImageRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT;
 const NODE_ENV = process.env.NODE_ENV;
