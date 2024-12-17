@@ -10,7 +10,6 @@ const imagesRoutes = require("./routes/object_image");
 const userRoutes = require("./routes/user");
 const scanHistoryRoutes = require("./routes/scan_history");
 const authRoutes = require("./routes/auth");
-const uploadImageRoutes = require("./routes/upload_image");
 
 const app = express();
 
@@ -24,7 +23,6 @@ app.use("/api/image", imagesRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/history", scanHistoryRoutes);
 app.use("/api/auth", authRoutes);
-// app.use("/api/uploadimage", uploadImageRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const PORT = process.env.PORT;
