@@ -107,7 +107,7 @@ router.get("/:id", (req, res) => {
     if (relation) {
       const sql = `
         SELECT 
-          o.id as object_id
+          o.id as object_id,
           o.user_id AS user_id,
           o.nama AS object_name,
           o.date_time AS date_time,
