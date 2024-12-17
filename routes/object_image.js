@@ -27,7 +27,7 @@ router.post("/", upload.array("images", 10), (req, res) => {
   const { object_id } = req.body;
   const fileInfos = req.files.map((file) => ({
     object_id: object_id,
-    src: file.path,
+    src: file.filename,
   }));
 
   const sql = `INSERT INTO ${TABLE} (object_id, src) VALUES ?`;
