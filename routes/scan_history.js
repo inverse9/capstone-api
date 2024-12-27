@@ -70,4 +70,37 @@ router.post("/", (req, res) => {
   });
 });
 
+// Tambahkan Endpoint untuk Persentase Scan
+router.get("/scan-percentage", (req, res) => {
+  const sql = `
+    SELECT 
+      o.nama AS object_name, 
+      COUNT(h.id) AS scan_count,
+      (COUNT(h.id) * 100 / (SELECT COUNT(*) FROM ${TABLE})) AS percentage
+    FROM 
+      object o
+    JOIN 
+      ${TABLE} h ON o.id = h.object_id
+    GROUP BY 
+      o.nama
+    ORDER BY 
+      scan_count DESC;
+  `;
+
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Internal server error" });
+    }
+
+    const response = results.map((row) => ({
+      object_name: row.object_name,
+      scan_count: row.scan_count,
+      percentage: parseFloat(row.percentage.toFixed(2)), // Format ke 2 desimal
+    }));
+
+    res.json(response);
+  });
+});
+
 module.exports = router;
