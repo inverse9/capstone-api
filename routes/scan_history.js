@@ -64,7 +64,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   const { object_id } = req.body;
   const sql = `INSERT INTO ${TABLE} (object_id) VALUES (?)`;
-  db.query(sql, [object_id, judul, isi], (err, result) => {
+  db.query(sql, [object_id], (err, result) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json({ id: result.insertId, object_id });
   });
